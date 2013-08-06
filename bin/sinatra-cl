@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+@command =  ARGV[0]
+@argument = ARGV[1]
+
+
+require_relative "../lib/sinatra-cl"
