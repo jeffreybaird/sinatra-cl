@@ -2,19 +2,17 @@
 
 TODO: Write a gem description
 
+This is a sinatra app generator based on [Ashley William's](http://heyashleyashley.com/) [Ratpack](https://github.com/ashleygwilliams/ratpack)
+
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'sinatra-cl'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Or install it:
 
     $ gem install sinatra-cl
+
+Generate a Sinatra App:
+
+    $ sinatra-cl new app
 
 ## Usage
 
