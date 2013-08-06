@@ -2,7 +2,7 @@
 
 TODO: Write a gem description
 
-This is a sinatra app generator based on [Ashley William's](http://heyashleyashley.com/) [Ratpack](https://github.com/ashleygwilliams/ratpack)
+This is a sinatra app generator based on [Ashley Williams'](http://heyashleyashley.com/) [Ratpack](https://github.com/ashleygwilliams/ratpack)
 
 ## Installation
 
