@@ -10,10 +10,10 @@ Gem::Specification.new do |gem|
   gem.email         = ["jlbaird87@gmail.com"]
   gem.description   = "This uses Ashley William's ratpack setup to scaffold a sinatra app"
   gem.summary       = "This is a test"
-  gem.homepage      = ""
+  gem.homepage      = "sinatra-cl"
 
   gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.executables   << ""
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 end
