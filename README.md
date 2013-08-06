@@ -6,15 +6,15 @@ This is a sinatra app generator based on [Ashley William's](http://heyashleyashl
 
 ## Installation
 
-Or install it:
+Install it:
 
     $ gem install sinatra-cl
+
+## Usage
 
 Generate a Sinatra App:
 
     $ sinatra-cl new app
-
-## Usage
 
 TODO: Write usage instructions here
 
