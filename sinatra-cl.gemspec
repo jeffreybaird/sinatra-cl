@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Sinatra::Cl::VERSION
   gem.authors       = ["jeffreybaird"]
   gem.email         = ["jlbaird87@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = "This uses Ashley William's ratpack setup to scaffold a sinatra app"
+  gem.summary       = "This is a test"
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
