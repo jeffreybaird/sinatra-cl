@@ -15,6 +15,9 @@ Install it:
 Generate a Sinatra App:
 
     $ sinatra-cl new app
+    $ cd app/
+    $ bundle install
+    $ shotgun
 
 TODO: Write usage instructions here
 

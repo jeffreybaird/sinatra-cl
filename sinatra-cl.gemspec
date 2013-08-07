@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.executables   = ["sinatra-cl"]
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+  gem.add_runtime_dependency  "rake",["~>1.0.0"]
 end
