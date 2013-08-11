@@ -1,6 +1,4 @@
-# Sinatra::Cl
-
-TODO: Write a gem description
+# Sinatra-cl
 
 This is a sinatra app generator based on [Ashley Williams'](http://heyashleyashley.com/) [Ratpack](https://github.com/ashleygwilliams/ratpack)
 
@@ -19,7 +17,9 @@ Generate a Sinatra App:
     $ bundle install
     $ shotgun
 
-TODO: Write usage instructions here
+By default, Sinatra-cl generates a template with twitter bootstrap, to create a sinatra app without twitter bootstrap run:
+
+    $ sinatra-cl new app --no-bootstrap
 
 ## Contributing
 
