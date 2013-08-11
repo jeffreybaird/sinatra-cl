@@ -17,16 +17,6 @@ module Sinatra
         @flags = parse_flags(user_input[2..-1])
       end
 
-      def parse_flags(flags)
-        flags.map{|flag_name| Flag.new(flag_name).check_flag}
-      end
-
-      def execute_new(app_name)
-        app_name = "sinatra-app" if app_name.nil?
-        parent
-        files
-      end
-
       def app
         case command
         when "new"
@@ -38,13 +28,26 @@ module Sinatra
         end
       end
 
+      private
+
+      def execute_new(app_name)
+        app_name = "sinatra-app" if app_name.nil?
+        parent
+        files
+      end
+
       def parent
-        Sinatra::Cl::Directory.new(app_name, flags).build
+        Sinatra::Cl::Directory.new(app_name).build
       end
 
       def files
         Sinatra::Cl::Files.new(app_name, flags).build
       end
+
+      def parse_flags(flags)
+        flags.map{|flag_name| Flag.new(flag_name).check_flag}
+      end
+
 
 
     end

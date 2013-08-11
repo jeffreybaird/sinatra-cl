@@ -2,8 +2,6 @@ module Sinatra
   module Cl
     class Files
 
-      attr_reader :app_name, :flags
-
       def initialize(app_name, flags)
         @app_name = app_name
         @flags = flags
@@ -15,6 +13,9 @@ module Sinatra
         public_files unless no_bootstrap?
         no_bootstrap? ? view_files_no_bootstrap : view_files
       end
+
+      attr_reader :app_name, :flags; private :app_name, :flags
+      private
 
       def config
         File.open("#{app_name}/config.ru", "w+") { |io|

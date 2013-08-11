@@ -2,16 +2,16 @@ module Sinatra
   module Cl
     class Directory
 
-      attr_reader :app_name, :flags
-
-      def initialize(app_name, flags)
+      def initialize(app_name)
         @app_name = app_name
-        @flags = flags
       end
 
       def build
         parent
       end
+
+      attr_reader :app_name; private :app_name
+      private
 
       def parent
         Dir.mkdir(app_name)
