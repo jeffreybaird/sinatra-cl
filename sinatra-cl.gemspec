@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.name          = "sinatra-cl"
   gem.version       = Sinatra::Cl::VERSION
   gem.authors       = ["jeffreybaird"]
-  gem.email         = ["jlbaird87@gmail.com"]
+  gem.email         = ["jeff@jeffreyleebaird.com"]
   gem.description   = "This uses Ashley William's ratpack setup to scaffold a sinatra app"
   gem.summary       = "This is a test"
   gem.homepage      = ""
