@@ -1,14 +1,14 @@
 require_relative "app"
-require_relative "bootstrap"
-require_relative "bootstrap_js"
-require_relative "bootstrap_responsive"
-require_relative "custom"
-require_relative "glyphicons_halflings"
-require_relative "glyphicons_halflings_white"
+require_relative "bootstrap/bootstrap"
+require_relative "bootstrap/bootstrap_js"
+require_relative "bootstrap/bootstrap_responsive"
+require_relative "bootstrap/custom"
+require_relative "bootstrap/glyphicons_halflings"
+require_relative "bootstrap/glyphicons_halflings_white"
 require_relative "gemfile"
 require_relative "index"
-require_relative "layout"
-require_relative "layout_no_bs"
+require_relative "bootstrap/layout"
+require_relative "no-bootstrap/layout_no_bs"
 require_relative "model"
 require_relative "rakefile"
 require_relative "readme"
@@ -25,9 +25,7 @@ module Sinatra
 
         def build
           top_level
-          lib_files
-          public_files unless no_bootstrap?
-          no_bootstrap? ? view_files_no_bootstrap : view_files
+          no_bootstrap? ? no_bootstrap_files : boostrap_files
         end
 
         attr_reader :app_name, :flags; private :app_name, :flags
@@ -37,6 +35,47 @@ module Sinatra
           flags.include?(:no_bootstrap)
         end
 
+        def top_level
+
+          file_constant_generator.each do |const|
+            const.build(app_name)
+          end
+
+          config
+          gitignore
+        end
+
+
+        def no_bootstrap_files
+          no_bootstrap_file_constant_generator.each do |const|
+            const.build(app_name)
+          end
+        end
+
+        def boostrap_files
+          boostrap_file_constant_generator.each do |const|
+            const.build(app_name)
+          end
+        end
+
+        def file_constant_generator
+          FileList.new("./lib/files/*.rb").map do |file|
+            const = my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
+            const unless const == Build
+          end.compact
+        end
+
+        def boostrap_file_constant_generator
+          FileList.new("./lib/files/bootstrap/*.rb").map do |file|
+            my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
+          end
+        end
+
+        def no_bootstrap_file_constant_generator
+          FileList.new("./lib/files/no-boostrap/*.rb").map do |file|
+            my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
+          end
+        end
 
         def config
           File.open("#{app_name}/config.ru", "w+") { |io|
@@ -50,39 +89,14 @@ module Sinatra
           }
         end
 
-        def top_level
-
-          [Readme, Rakefile, App, Gemfile].each do |const|
-            const.build(app_name)
+        def my_constantize(class_name)
+          unless /\A(?:::)?([A-Z]\w*(?:::[A-Z]\w*)*)\z/ =~ class_name
+            raise NameError, "#{class_name.inspect} is not a valid constant name!"
           end
 
-          config
-          gitignore
+          Object.module_eval("::#{$1}", __FILE__, __LINE__)
         end
 
-        def public_files
-          [Bootstrap,BootstrapResponsive,BootstrapJs,GlyphiconsHalflings,GlyphiconsHalflingsWhite, Custom].each do |const|
-            const.build(app_name)
-          end
-        end
-
-        def view_files_no_bootstrap
-          [LayoutNoBs,Index].each do |const|
-            const.build(app_name)
-          end
-        end
-
-        def lib_files
-          [Model].each do |const|
-            const.build(app_name)
-          end
-        end
-
-        def view_files
-          [Layout,Index].each do |const|
-            const.build(app_name)
-          end
-        end
       end
     end
   end
