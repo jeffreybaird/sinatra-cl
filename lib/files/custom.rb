@@ -1,3 +1,10 @@
+module Sinatra
+  module Cl
+    module Files
+      class Custom
+        def self.build(app_name)
+          File.open("#{app_name}/public/css/custom.css", "w+") { |io|
+            io << <<-END
 body {
   background: black;
   font-weight: 400;
@@ -57,3 +64,10 @@ pre {
 #github {
   z-index: 2;
 }
+            END
+          }
+        end
+      end
+    end
+  end
+end

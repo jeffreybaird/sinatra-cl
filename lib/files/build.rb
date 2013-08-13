@@ -1,3 +1,18 @@
+require_relative "app"
+require_relative "bootstrap"
+require_relative "bootstrap_js"
+require_relative "bootstrap_responsive"
+require_relative "custom"
+require_relative "glyphicons_halflings"
+require_relative "glyphicons_halflings_white"
+require_relative "gemfile"
+require_relative "index"
+require_relative "layout"
+require_relative "layout_no_bs"
+require_relative "model"
+require_relative "rakefile"
+require_relative "readme"
+
 module Sinatra
   module Cl
     module Files
@@ -18,6 +33,11 @@ module Sinatra
         attr_reader :app_name, :flags; private :app_name, :flags
         private
 
+        def no_bootstrap?
+          flags.include?(:no_bootstrap)
+        end
+
+
         def config
           File.open("#{app_name}/config.ru", "w+") { |io|
             io << "require File.join(File.dirname(__FILE__), 'app.rb')\nrun Name::#{app_name.capitalize}"
@@ -30,15 +50,10 @@ module Sinatra
           }
         end
 
-        def no_bootstrap?
-          flags.include?(:no_bootstrap)
-        end
-
-
         def top_level
 
-          FileList.new('./assets/*').each do |path|
-            FileUtils.cp(path,"#{app_name}/#{path.pathmap("%f")}") unless File.directory?(path)
+          [Readme, Rakefile, App, Gemfile].each do |const|
+            const.build(app_name)
           end
 
           config
@@ -46,30 +61,26 @@ module Sinatra
         end
 
         def public_files
-          FileList.new('./assets/public/**/*.*').each do |path|
-            new_path = path.pathmap("%p").split("/").pop(3).unshift("#{app_name}").join("/")
-            FileUtils.cp(path, new_path)
+          [Bootstrap,BootstrapResponsive,BootstrapJs,GlyphiconsHalflings,GlyphiconsHalflingsWhite, Custom].each do |const|
+            const.build(app_name)
           end
         end
 
         def view_files_no_bootstrap
-          FileList.new('./assets/views_no_bootstrap/**/*.*').each do |path|
-            new_path = path.pathmap("%p").split("/").pop(1).unshift("#{app_name}","views").join("/")
-            FileUtils.cp(path, new_path)
+          [LayoutNoBs,Index].each do |const|
+            const.build(app_name)
           end
         end
 
         def lib_files
-          FileList.new('./assets/lib/**/*.*').each do |path|
-            new_path = path.pathmap("%p").split("/").pop(2).unshift("#{app_name}").join("/")
-            FileUtils.cp(path, new_path)
+          [Model].each do |const|
+            const.build(app_name)
           end
         end
 
         def view_files
-          FileList.new('./assets/views/**/*.*').each do |path|
-            new_path = path.pathmap("%p").split("/").pop(2).unshift("#{app_name}").join("/")
-            FileUtils.cp(path, new_path)
+          [Layout,Index].each do |const|
+            const.build(app_name)
           end
         end
       end

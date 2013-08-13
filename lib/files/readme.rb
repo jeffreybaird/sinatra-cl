@@ -1,3 +1,10 @@
+module Sinatra
+  module Cl
+    module Files
+      class Readme
+        def self.build(app_name)
+          File.open("#{app_name}/README.md", "w+") { |io|
+            io << <<-END
 #ratpack
 
 a simple boilerplate for creating production-ready sinatra apps that use activerecord and sqlite
@@ -21,3 +28,10 @@ if ya want haml and sass, be on the look for classy.
 ### Development
    * [shotgun](https://github.com/rtomayko/shotgun)
    * [tux](http://tagaholic.me/2011/04/10/tux-a-sinatra-console.html)
+            END
+          }
+        end
+      end
+    end
+  end
+end

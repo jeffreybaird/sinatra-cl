@@ -1,3 +1,10 @@
+module Sinatra
+  module Cl
+    module Files
+      class App
+        def self.build(app_name)
+          File.open("#{app_name}/app.rb", "w+") { |io|
+            io << <<-END
 require 'bundler'
 Bundler.require
 
@@ -15,7 +22,7 @@ module Name
     end
 
     #database
-    set :database, "sqlite3:///#{argument}.db"
+    set :database, "sqlite3:///#{app_name}.db"
 
     #filters
 
@@ -31,5 +38,12 @@ module Name
       end
     end
 
+  end
+end
+            END
+          }
+        end
+      end
+    end
   end
 end

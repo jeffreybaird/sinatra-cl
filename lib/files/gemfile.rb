@@ -3,7 +3,7 @@ module Sinatra
     module Files
       class Gemfile
         def self.build(app_name)
-          File.open("#{app_name}/config.ru", "w+") { |io|
+          File.open("#{app_name}/Gemfile", "w+") { |io|
             io << <<-END
 source "https://rubygems.org"
 
@@ -19,6 +19,7 @@ group :development do
   gem "tux"
 end
             END
+          }
         end
       end
     end

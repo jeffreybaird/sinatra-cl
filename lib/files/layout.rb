@@ -1,3 +1,10 @@
+module Sinatra
+  module Cl
+    module Files
+      class Layout
+        def self.build(app_name)
+          File.open("#{app_name}/views/layout.erb", "w+") { |io|
+            io << <<-END
 <!doctype html>
 <html>
   <head>
@@ -11,3 +18,10 @@
     <script src="/js/boostrap.min.js"></script>
   </body>
 </html>
+            END
+          }
+        end
+      end
+    end
+  end
+end

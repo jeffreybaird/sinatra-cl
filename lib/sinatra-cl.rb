@@ -1,5 +1,5 @@
 require_relative "sinatra-cl/version"
-require_relative "files"
+require_relative "files/build"
 require_relative "directory"
 require_relative "flag"
 require 'rake'
@@ -37,11 +37,11 @@ module Sinatra
       end
 
       def parent
-        Sinatra::Cl::Directory.new(app_name).build
+        Directory.new(app_name).build
       end
 
       def files
-        Sinatra::Cl::Files.new(app_name, flags).build
+        Files::Build.new(app_name, flags).build
       end
 
       def parse_flags(flags)
