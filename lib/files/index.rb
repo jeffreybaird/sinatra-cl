@@ -5,8 +5,7 @@ module Sinatra
         def self.build(app_name)
           File.open("#{app_name}/views/index.erb", "w+") { |io|
             io << <<-END
-<h1>classy</h1>
-<h2>as fuck</h2>
+<h1>So. Classy.</h1>
             END
           }
         end
