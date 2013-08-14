@@ -14,7 +14,6 @@ module Sinatra
       private
 
       def parent
-        puts "creating #{app_name}"
         Dir.mkdir(app_name)
         Dir.mkdir("#{app_name}/lib")
         Dir.mkdir("#{app_name}/public")

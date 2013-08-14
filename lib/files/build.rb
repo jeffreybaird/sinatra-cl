@@ -36,9 +36,8 @@ module Sinatra
         end
 
         def top_level
-          puts file_constant_generator
 
-          file_constant_generator.each do |const|
+          [App,Gemfile,Index,Model,Rakefile,Readme].each do |const|
             const.build(app_name)
           end
 
@@ -48,35 +47,14 @@ module Sinatra
 
 
         def no_bootstrap_files
-          puts no_bootstrap_files
-          no_bootstrap_file_constant_generator.each do |const|
+          [LayoutNoBs].each do |const|
             const.build(app_name)
           end
         end
 
         def boostrap_files
-          puts file_constant_generator
-          boostrap_file_constant_generator.each do |const|
+          [Bootstrap, BootstrapJs,BootstrapResponsive,Custom,GlyphiconsHalflings,GlyphiconsHalflingsWhite,Layout].each do |const|
             const.build(app_name)
-          end
-        end
-
-        def file_constant_generator
-          FileList.new("./lib/files/*.rb").map do |file|
-            const = my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
-            const unless const == Build
-          end.compact
-        end
-
-        def boostrap_file_constant_generator
-          FileList.new("./lib/files/bootstrap/*.rb").map do |file|
-            my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
-          end
-        end
-
-        def no_bootstrap_file_constant_generator
-          FileList.new("./lib/files/no-boostrap/*.rb").map do |file|
-            my_constantize("Sinatra::Cl::Files::" << file.pathmap("%n").split("_").map{|x| x.capitalize}.join(""))
           end
         end
 
@@ -90,14 +68,6 @@ module Sinatra
           File.open("#{app_name}/.gitignore", "w+") { |io|
             io << ".DS_STORE\n*ds_store\n*.db"
           }
-        end
-
-        def my_constantize(class_name)
-          unless /\A(?:::)?([A-Z]\w*(?:::[A-Z]\w*)*)\z/ =~ class_name
-            raise NameError, "#{class_name.inspect} is not a valid constant name!"
-          end
-
-          Object.module_eval("::#{$1}", __FILE__, __LINE__)
         end
 
       end
