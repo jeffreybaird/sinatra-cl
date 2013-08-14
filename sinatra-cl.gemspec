@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = "This uses Ashley William's ratpack setup to scaffold a sinatra app"
   gem.summary       = "This is a test"
   gem.homepage      = ""
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = ["sinatra-cl"]
