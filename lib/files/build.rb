@@ -79,7 +79,7 @@ module Sinatra
 
         def config
           File.open("#{app_name}/config.ru", "w+") { |io|
-            io << "require File.join(File.dirname(__FILE__), 'app.rb')\nrun Name::#{app_name.capitalize}"
+            io << "require File.join(File.dirname(__FILE__), 'app.rb')\nrun #{app_name.capitalize}::App"
           }
         end
 

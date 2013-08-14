@@ -12,7 +12,7 @@ Dir.glob('./lib/*.rb') do |model|
   require model
 end
 
-module Name
+module #{app_name.capitalize}
   class App < Sinatra::Application
 
     #configure
