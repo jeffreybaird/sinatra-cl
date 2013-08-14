@@ -36,6 +36,7 @@ module Sinatra
         end
 
         def top_level
+          puts file_constant_generator
 
           file_constant_generator.each do |const|
             const.build(app_name)
@@ -47,12 +48,14 @@ module Sinatra
 
 
         def no_bootstrap_files
+          puts no_bootstrap_files
           no_bootstrap_file_constant_generator.each do |const|
             const.build(app_name)
           end
         end
 
         def boostrap_files
+          puts file_constant_generator
           boostrap_file_constant_generator.each do |const|
             const.build(app_name)
           end
